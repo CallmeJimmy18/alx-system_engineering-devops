@@ -1,2 +1,2 @@
 #!/bin/bash
-echo -e "\b"o{{a..n},{p..z}}"\n"
+echo -e "\b"{a..n}{a..z}"\n" "\b"o{{a..n},{p..z}}"\n" "\b"{p..z}{a..z}"\n"
