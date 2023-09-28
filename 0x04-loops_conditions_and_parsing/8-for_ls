@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# script that displays the content of the current directory
+
+lst=$(ls)
+for FILE in $lst; do
+	echo "$FILE" | cut -d '-' -f2
+done
