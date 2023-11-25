@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# configure machine so that we can connect to server without password.
+
+Host *
+    PasswordAuthentication no
+    IdentityFile ~/.ssh/school
+    HashKnownHosts yes
+    SendEnv LANG LC_*
+    GSSAPIAuthentication yes
+    GSSAPIDelegateCredentials no
