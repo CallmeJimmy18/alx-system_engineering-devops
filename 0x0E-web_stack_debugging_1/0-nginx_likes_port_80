@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Nginx must be running, and listening on port 80
+
+sudo apt-get update
+sudo apt-get -y install nginx
+
+sudo systemctl status nginx
+sudo sed -i '/listen 80;/c\    listen 80 default_server;' "/etc/nginx/sites-available/default"
+sudo netstat -tuln | grep 80
+
+sudo systemctl restart nginx
+sudo systemctl status nginx
