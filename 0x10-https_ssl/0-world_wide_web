@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# Configure domain zone so that the subdomain www points to load-balancer
+
+display_funct() {
+	local domain=$1
+	local subdomain=$2
+
+	local record_kind
+	record_kind=$(awk -v sub="$subdomain" '$1 == sub {print $NF-1, $NF}' "/etc/bind/db.$domain")
+
+	local record_type=$(echo "$record_kind" | awk '{print $1}')
+	local destination=$(echo "$record_kind" | awk '{print $2}')
+	echo "The subdomain $subdomain is a $record_type record and points to $destination."
+}
+
+if [ $# -lt 1 ]; then
+    exit 1
+fi
+
+domain=$1
+subdomain=$2
+
+the_default_subd=("www" "lb-01" "web-01" "web-02")
+
+if [ -n "$subdomain" ]; then
+	display_funct "$domain" "$subdomain"
+else
+	for sbd in "${the_default_subd[@]}"; do
+		display_funct "$domain" "$sbd"
+	done
+fi
