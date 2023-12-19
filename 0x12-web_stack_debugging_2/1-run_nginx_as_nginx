@@ -16,7 +16,7 @@ server {
                 try_files $uri $uri/ =404;
         }
 }"
-echo "$config" > "$config_location"
+printf "%s" "$config" > "$config_location"
 
 chown nginx /etc/nginx/nginx.conf
 sudo -u nginx chmod u+r /etc/nginx/nginx.conf
