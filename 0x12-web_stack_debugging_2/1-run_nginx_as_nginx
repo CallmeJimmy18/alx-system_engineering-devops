@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Fixing a broken container so that Nginx is running on prot 80.
+
+config_location='/etc/nginx/sites-available/default'
+config="
+server {
+        listen 8080 default_server;
+        listen [::]:8080 default_server ipv6only=on;
+
+        root /usr/share/nginx/html;
+        index index.html index.htm;
+
+        server_name localhost;
+
+        location / {
+                try_files $uri $uri/ =404;
+        }
+}"
+echo "$config" > "$config_location"
+
+chown nginx /etc/nginx/nginx.conf
+sudo -u nginx chmod u+r /etc/nginx/nginx.conf
+
+sudo service nginx restart

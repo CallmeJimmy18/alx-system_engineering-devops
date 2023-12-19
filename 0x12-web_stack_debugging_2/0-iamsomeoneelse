@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Bash script that accepts one argument
+# run the whoami command under the user passed as an argument
+
+if [ $# -eq 0 ]; then
+	whoami
+else
+	username="$1"
+	su -c "whoami" $username
+fi
