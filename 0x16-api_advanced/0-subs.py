@@ -9,7 +9,7 @@ def number_of_subscribers(subreddit):
 
     headers = {"User-Agent": "linux:0x16.api:v1.0.0 (by /u/c_a_l_l_me_jimmy18)"}
 
-    response = requests.get(api_url, headers=headers)
+    response = requests.get(api_url, headers=headers, allow_redirects=False)
 
     if response.status_code == 200:
         return response.json().get("data").get("subscribers")
