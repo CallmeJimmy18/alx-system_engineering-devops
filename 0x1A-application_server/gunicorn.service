@@ -1,0 +1,17 @@
+[Unit]
+Description=Gunicorn instance to serve AirBnB Clone
+After=network.target
+
+[Service]
+# Run the service under the 'ubuntu' user
+User=ubuntu
+WorkingDirectory=/home/ubuntu/AirBnB_clone_v4
+# Start Ounicorn with 3 workers, binding to 0.0.0.0:5003, log errors to /temp/airbnb-errors.log
+ExecStart=gunicorn --workers 3 --bind 0.0.0.0:5003 web_dynamic.2-hbnb:app --error-logfile /tmp/airbnb-error.log
+Restart=always
+StandardOutput=append:/tmp/airbnb-access.log
+StandardError=append:/tmp/airbnb-error.log
+SyslogIdentifier=gunicorn
+
+[Install]
+WantedBy=multi-user.target
